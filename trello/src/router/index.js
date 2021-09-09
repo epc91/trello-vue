@@ -1,17 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Board from '../views/Board.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Board from "../views/Board.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'Board',
-    component: Board
+    path: "/",
+    name: "Board",
+    component: Board,
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

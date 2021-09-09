@@ -1,71 +1,68 @@
 <template>
-    <main class="list-container">
-        <Overlay/>
-        <Popup/>
-        <section class="list-wrapper">
-            <draggable 
-                class="list-draggable"
-                :options="{ group: 'lists' }"
-                group="lists"
-                ghostClass="ghost"
-            >
-                <div 
-                    class="list-card"
-                    v-for="(list, index) in lists"
-                    :key="index"    
-                >
-                    <label class="list-header"> {{ list.name }} </label>
-                    <div class="list-content">
-                        <CardsList :listId="list.id" :listName="list-name"/>
-                    </div>
-                    <div class="list-footer">
-                        <Card :listId="list.id"/>
-                    </div>
-                </div>
-            </draggable>
-            <input 
-                class="input-new-list" 
-                type="text" 
-                placeholder="Create a List" 
-                v-model="listName" 
-                @keyup.enter="createList">
-        </section>
-    </main>
+  <main class="list-container">
+    <Overlay />
+    <Popup />
+    <section class="list-wrapper">
+      <draggable
+        :options="{ group: 'lists' }"
+        group="lists"
+        ghostClass="ghost"
+        class="list-draggable"
+      >
+        <div class="list-card" v-for="(list, index) in lists" :key="index">
+          <label class="list-header">{{ list.name }}</label>
+          <div class="list-content">
+            <CardList :listId="list.id" :listName="list.name" />
+          </div>
+          <div class="list-footer">
+            <Card :listId="list.id" />
+          </div>
+        </div>
+      </draggable>
+      <input
+        type="text"
+        class="input-new-list"
+        placeholder="Create a List"
+        v-model="listName"
+        @keyup.enter="createList"
+      />
+    </section>
+  </main>
 </template>
 
 <script>
-import { VueDraggableNext } from 'vue-draggable-next';
-import CardsList from '@/components/CardsList';
-import Card from '@/components/Card';
-import Overlay from '@/components/Overlay';
-import Popup from '@/components/Popup';
+import { VueDraggableNext } from "vue-draggable-next";
+import CardList from "@/components/CardList";
+import Card from "@/components/Card.vue";
+import Overlay from "@/components/Overlay";
+import Popup from "@/components/Popup";
 
 export default {
-    components: {
-        draggable: VueDraggableNext,
-        CardsList,
-        Card,
-        Overlay,
-        Popup
+  components: {
+    draggable: VueDraggableNext,
+    CardList,
+    Card,
+    Overlay,
+    Popup,
+  },
+  data() {
+    return {
+      listName: "",
+    };
+  },
+  methods: {
+    createList() {
+      if (this.listName !== "") {
+        this.$store.dispatch("createList", this.listName);
+        this.listName = "";
+      }
     },
-    data() {
-        return {
-            listName: '',
-        };
+  },
+  computed: {
+    lists() {
+      return this.$store.getters["lists"];
     },
-    methods: {
-        createList() {
-            if(this.listName !== '') {
-                this.$store.dispatch('createList', this.listName);
-                this.listName = '';
-            }
-        },
-    },
-    computed: {
-        lists() {
-            return this.$store.getters['lists'];
-        },
-    },    
+  },
 };
 </script>
 
@@ -78,6 +75,7 @@ export default {
   border: 1px;
   z-index: 10;
 }
+
 .list-wrapper {
   position: relative;
   display: flex;
@@ -95,13 +93,16 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
 }
+
 .ghost {
   opacity: 0.5;
 }
+
 .list-draggable {
   display: flex;
   gap: 20px;
 }
+
 .input-new-list {
   display: flex;
   height: 30px;
@@ -110,9 +111,11 @@ export default {
   background-color: rgba(235, 236, 240, 0.5);
   min-width: 260px;
 }
+
 .input-new-list::placeholder {
   color: white;
 }
+
 .list-card {
   position: relative;
   display: flex;
@@ -120,6 +123,7 @@ export default {
   min-width: 300px;
   height: auto;
 }
+
 .list-header {
   position: relative;
   display: flex;
@@ -135,6 +139,7 @@ export default {
   color: rgba(24, 43, 77, 1);
   user-select: none;
 }
+
 .list-content {
   overflow-y: scroll;
   position: relative;
@@ -148,6 +153,7 @@ export default {
   box-shadow: 1.5px 1.5px 1.5px 0.1px rgba(255, 255, 255, 0.1);
   color: rgba(24, 43, 77, 1);
 }
+
 .list-footer {
   position: relative;
   display: flex;

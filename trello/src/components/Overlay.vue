@@ -1,28 +1,22 @@
 <template>
-    <transition>
-        <div 
-            class="overlay" 
-            v-if="overlayIsActive"
-            @click="closeOverlay" 
-        ></div>
-    </transition>
+  <transition>
+    <div v-if="overlayIsActive" class="overlay" @click="closeOverlay"></div>
+  </transition>
 </template>
 
 <script>
 export default {
-    methods: {
-        closeOverlay() {
-            this.$store.dispatch('toggleOverlay')
-        }
+  methods: {
+    closeOverlay() {
+      this.$store.dispatch("toggleOverlay");
     },
-    computed: {
-        overlayIsActive() {
-            return this.$store.getters['overlay']
-        },
+  },
+  computed: {
+    overlayIsActive() {
+      return this.$store.getters["overlay"];
     },
+  },
 };
-</script>
-
 </script>
 
 <style>

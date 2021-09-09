@@ -1,13 +1,10 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
-// Mutations
-import rootMutations from './mutations.js'
-// Actions
-import rootActions from './actions.js'
-// Getters
-import rootGetters from './getters.js'
+import rootMutations from "./mutations.js";
+import rootActions from "./actions.js";
+import rootGetters from "./getters.js";
 
-export default createStore({
+const store = createStore({
   state() {
     return {
       overlay: false,
@@ -17,37 +14,39 @@ export default createStore({
       lists: [
         {
           id: 1,
-          name: 'list #1',
+          name: "Test list #1",
         },
         {
           id: 2,
-          name: 'list #2',
+          name: "Test list #2",
         },
         {
           id: 3,
-          name: 'list #3',
+          name: "Test list #3",
         },
       ],
       cards: [
         {
           listId: 1,
           id: 1,
-          name: 'card 1'
+          name: "card 1",
         },
         {
           listId: 2,
           id: 2,
-          name: 'card 2'
+          name: "card 2",
         },
         {
           listId: 3,
           id: 3,
-          name: 'card 3'
+          name: "card 3",
         },
-      ]
-    }
+      ],
+    };
   },
   mutations: rootMutations,
   actions: rootActions,
   getters: rootGetters,
-})
+});
+
+export default store;
